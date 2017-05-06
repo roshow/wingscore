@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import LeaderboardContainer from './LeaderboardContainer';
 
 class App extends Component {
   render() {
@@ -11,6 +12,7 @@ class App extends Component {
         <p className="App-intro">
           Tournament software for the X-Wing Miniatures Game.
         </p>
+        <LeaderboardContainer />
       </div>
     );
   }

@@ -1,0 +1,13 @@
+.Flexgrid-row {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid blue;
+}
+
+.Flexgrid-col {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border-right: 1px solid red;
+  border-left: 1px solid red;
+}
