@@ -3,56 +3,27 @@ import ReactDOM from 'react-dom';
 import App from './containers/App';
 import './index.css';
 
-import { createStore, compose, combineReducers } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-// import rootReducer from './reducers/rootReducer';
+import rootReducer from './reducers/rootreducer';
+import thunkMiddleware from 'redux-thunk';
 
-const initPlayersArr = [
-  {
-    name: 'Rolando Garcia',
-    wins: 4,
-    losses: 0,
-    mov: 800,
-  },
-  {
-    name: 'Bruce Wayne',
-    wins: 3,
-    losses: 1,
-    mov: 600,
-  },
-  {
-    name: 'Clark Kent',
-    wins: 2,
-    losses: 2,
-    mov: 400,
-  }
-]
-
-const players = (state = [], action = {}) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-}
-
-const rootReducer = combineReducers({
-  players
-})
 
 const configureStore = (preloadedState) => {
   const store = createStore(
     rootReducer,
     preloadedState,
     compose(
+      applyMiddleware(
+        thunkMiddleware
+      ),
       window.devToolsExtension ? window.devToolsExtension() : f => f
     )
   )
   return store
 }
 
-const store = configureStore({
-  players: initPlayersArr
-})
+const store = configureStore()
 
 ReactDOM.render(
   <Provider store={ store }>
