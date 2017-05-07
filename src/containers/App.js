@@ -7,6 +7,17 @@ import { connect } from 'react-redux';
 
 class App extends Component {
 
+  constructor (props) {
+    super(props)
+
+    this.handleGenerateRound = this.handleGenerateRound.bind(this)
+  }
+
+  handleGenerateRound (e) {
+    e.preventDefault()
+    this.props.generateRound(this.props.round + 1)
+  }
+
   render() {
     return (
       <div className="App">
@@ -18,7 +29,7 @@ class App extends Component {
         </p>
         <PlayerForm />
         <PlayerManager />
-        <GenerateRoundButton round={ this.props.round } />
+        <GenerateRoundButton round={ this.props.round } handleClick={ this.handleGenerateRound }/>
       </div>
     );
   }
@@ -28,4 +39,15 @@ const mapStateToProps = state => ({
   round: state.round
 })
 
-export default connect(mapStateToProps)(App);
+const matchDispatchToProps = {
+  generateRound: function (round) {
+    return {
+      type: 'NEW_ROUND',
+      payload: {
+        round
+      }
+    }
+  }
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(App);
