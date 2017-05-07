@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'; 
+import { AddPlayer } from './../actions'
 
 class PlayerForm extends Component {
   constructor(props) {
@@ -16,6 +18,7 @@ class PlayerForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
+    if (this.state.value === '') return 
     this.props.onSubmit(this.state.value)
     this.setState({ value: '' })
   }
@@ -33,17 +36,7 @@ class PlayerForm extends Component {
   }
 }
 
-import { connect } from 'react-redux'; 
 
-const consoleValue = value => {
-  console.log(value)
-  return {
-    type: 'ADD_PLAYER',
-    payload: {
-      name: value
-    }
-  }
-}
-
-
-export default connect(null, { onSubmit: consoleValue })(PlayerForm)
+export default connect(null, {
+  onSubmit: AddPlayer
+})(PlayerForm)

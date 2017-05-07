@@ -1,6 +1,7 @@
 import React from 'react'
 import { Row, Column } from './Flexgrid'
 import './Leaderboard.css'
+import { RemovePlayer } from './../actions'
 
 const PlayerManager = ({ players, removePlayer }) => (
   <section className="Leaderboard">
@@ -10,10 +11,10 @@ const PlayerManager = ({ players, removePlayer }) => (
         <Column></Column>
       </Row>
       { 
-        players.map( ( player, i ) => (
+        Object.keys(players).map( ( key, i ) => (
           <Row key={ i }>
-            <Column>{ player.name }</Column>
-            <Column><div><button onClick={ removePlayer.bind(this, player.name) }>Remove</button></div></Column>
+            <Column>{ players[key].name }</Column>
+            <Column><div><button onClick={ removePlayer.bind(this, players[key].name) }>Remove</button></div></Column>
           </Row>
         ))
       }
@@ -27,17 +28,7 @@ const mapStateToProps = state => ({
   players: state.players
 });
 
-const mapDispatchToProps = {
-  removePlayer: function (name) {
-    return {
-      type: 'REMOVE_PLAYER',
-      payload: {
-        name 
-      }
-    }
-  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(PlayerManager);
+export default connect(mapStateToProps, {
+  removePlayer: RemovePlayer
+})(PlayerManager);
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import LeaderboardContainer from './LeaderboardContainer';
 import PlayerForm from './../components/PlayerForm';
 import PlayerManager from './../components/PlayerManager';
 
