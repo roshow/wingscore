@@ -18,7 +18,24 @@ const tournamentStarted = (state = false, action = {}) => {
     case 'NEW_ROUND':
       if ( action.payload.round > 0 ) return true
       return false
-    
+
+    default:
+      return state
+  }
+}
+
+const matches = (state = {}, action = {}) => {
+  switch (action.type) {
+    case 'NEW_ROUND':
+     return {
+      ...state,
+      [action.payload.round]: {
+        '1': {
+          
+        }
+      }
+     }
+
     default:
       return state
   }
@@ -27,7 +44,8 @@ const tournamentStarted = (state = false, action = {}) => {
 const rootreducer = combineReducers({
   players,
   round,
-  tournamentStarted
+  tournamentStarted,
+  matches
 })
 
 export default rootreducer
