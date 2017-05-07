@@ -1,5 +1,6 @@
 
 const players = (state = [], action = {}) => {
+  console.log(action)
   switch (action.type) {
     case 'ADD_PLAYER':
       return [
@@ -11,6 +12,9 @@ const players = (state = [], action = {}) => {
           mov: 0
         }
       ]
+
+    case 'REMOVE_PLAYER':
+      return [ ...state ].filter( player => ( player.name !== action.payload.name ) )
 
     default:
       return state;

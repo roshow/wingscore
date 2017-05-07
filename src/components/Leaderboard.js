@@ -7,7 +7,7 @@ const Leaderboard = ({ players }) => (
     <Column>
       <Row>
         <Column>Rank</Column>
-        <Column>Player</Column>
+        <Column>Name</Column>
         <Column>Record</Column>
         <Column>Points</Column>
         <Column>MOV</Column>

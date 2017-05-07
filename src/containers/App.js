@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import LeaderboardContainer from './LeaderboardContainer';
 import PlayerForm from './../components/PlayerForm';
+import PlayerManager from './../components/PlayerManager';
 
 class App extends Component {
   render() {
@@ -14,7 +15,7 @@ class App extends Component {
           Tournament software for the X-Wing Miniatures Game.
         </p>
         <PlayerForm />
-        <LeaderboardContainer />
+        <PlayerManager />
       </div>
     );
   }
