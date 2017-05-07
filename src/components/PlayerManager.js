@@ -2,6 +2,7 @@ import React from 'react'
 import { Row, Column } from './Flexgrid'
 import './Leaderboard.css'
 import { RemovePlayer } from './../actions'
+import { connect } from 'react-redux'; 
 
 const PlayerManager = ({ players, removePlayer }) => (
   <section className="Leaderboard">
@@ -21,8 +22,6 @@ const PlayerManager = ({ players, removePlayer }) => (
     </Column>
   </section>
 )
-
-import { connect } from 'react-redux'; 
 
 const mapStateToProps = state => ({
   players: state.players

@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 import PlayerForm from './../components/PlayerForm';
 import PlayerManager from './../components/PlayerManager';
+import GenerateRoundButton from './../components/GenerateRoundButton';
+import { connect } from 'react-redux'; 
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">
@@ -15,9 +18,14 @@ class App extends Component {
         </p>
         <PlayerForm />
         <PlayerManager />
+        <GenerateRoundButton round={ this.props.round } />
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  round: state.round
+})
+
+export default connect(mapStateToProps)(App);
