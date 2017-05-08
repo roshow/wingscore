@@ -32,7 +32,7 @@ function shuffle(originalArr) {
 function generateMatches (players, round=1, matches={}, match=1) {
   const updatedMatches = {
     ...matches,
-    [match]: {
+    [`${ round }.${ match }`]: {
       match,
       player1: players[0],
       player2: players[1],
