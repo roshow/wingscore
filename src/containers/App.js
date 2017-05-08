@@ -3,7 +3,8 @@ import './App.css';
 import PlayerForm from './../components/PlayerForm';
 import PlayerManager from './../components/PlayerManager';
 import GenerateRoundButton from './../components/GenerateRoundButton';
-import { connect } from 'react-redux'; 
+import { connect } from 'react-redux';
+import { shuffle } from './../logic/pairings'
 
 class App extends Component {
 
@@ -15,7 +16,9 @@ class App extends Component {
 
   handleNewRound (e) {
     e.preventDefault()
-    this.props.newRound(this.props.round + 1, Object.keys(this.props.players))
+    const playerIds = Object.keys(this.props.players)
+    const round = this.props.round + 1
+    this.props.newRound(round, round === 1 ? playerIds : shuffle(playerIds))
   }
 
   render() {

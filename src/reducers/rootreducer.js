@@ -1,7 +1,7 @@
 
 import { combineReducers } from 'redux';
 // import players from './players'
-import { initialParings } from './../logic/pairings'
+import { generateMatches } from './../logic/pairings'
 
 
 const players = (state = {}, action = {}) => {
@@ -70,7 +70,7 @@ const matches = (state = {}, action = {}) => {
     case 'NEW_ROUND': 
       return {
         ...state,
-        ...initialParings(action.payload.players, action.payload.round)
+        ...generateMatches(action.payload.players, action.payload.round)
       }
     default:
       return state

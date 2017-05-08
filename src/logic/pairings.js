@@ -1,15 +1,7 @@
-const players = [
-  'rolando',
-  'batman',
-  'marek',
-  'bruno',
-  'the joker',
-  'matthew'
-]
 
 // stole this from the Internet for shuffling a js array
 
-function shuffle(originalArr) {
+export const shuffle = originalArr => {
   let array = [...originalArr]
   var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -29,7 +21,7 @@ function shuffle(originalArr) {
   return array;
 }
 
-function generateMatches (players, round=1, matches={}, match=1) {
+export const generateMatches = (players, round=1, matches={}, match=1) => {
   const updatedMatches = {
     ...matches,
     [`${ round }.${ match }`]: {
