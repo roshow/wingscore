@@ -10,12 +10,12 @@ class App extends Component {
   constructor (props) {
     super(props)
 
-    this.handleGenerateRound = this.handleGenerateRound.bind(this)
+    this.handleNewRound = this.handleNewRound.bind(this)
   }
 
-  handleGenerateRound (e) {
+  handleNewRound (e) {
     e.preventDefault()
-    this.props.generateRound(this.props.round + 1)
+    this.props.newRound(this.props.round + 1, Object.keys(this.props.players))
   }
 
   render() {
@@ -29,22 +29,24 @@ class App extends Component {
         </p>
         <PlayerForm />
         <PlayerManager />
-        <GenerateRoundButton round={ this.props.round } handleClick={ this.handleGenerateRound }/>
+        <GenerateRoundButton handleClick={ this.handleNewRound }/>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  round: state.round
+  round: state.round,
+  players: state.players
 })
 
 const matchDispatchToProps = {
-  generateRound: function (round) {
+  newRound: function (round, players) {
     return {
       type: 'NEW_ROUND',
       payload: {
-        round
+        round,
+        players
       }
     }
   }

@@ -29,7 +29,7 @@ function shuffle(originalArr) {
   return array;
 }
 
-function makeMatches (players, matches={}, round=1, match=1) {
+function generateMatches (players, round=1, matches={}, match=1) {
   const updatedMatches = {
     ...matches,
     [match]: {
@@ -39,11 +39,11 @@ function makeMatches (players, matches={}, round=1, match=1) {
       bye: false
     }
   }
-  if (players.length > 0) {
-    return makeMatches(players.slice(2), updatedMatches, round, match + 1)
+  if (players.length > 2) {
+    return generateMatches(players.slice(2), round, updatedMatches, match + 1)
   }
   return updatedMatches
 }
 
-export const initialParings = players => makeMatches(shuffle(players))
+export const initialParings = (players) => generateMatches(shuffle(players))
 
