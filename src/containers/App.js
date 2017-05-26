@@ -3,8 +3,9 @@ import './App.css';
 import PlayerForm from './../components/PlayerForm';
 import PlayerManager from './../components/PlayerManager';
 import GenerateRoundButton from './../components/GenerateRoundButton';
+import { generateMatches, shuffle } from './../logic/pairings'
 import { connect } from 'react-redux';
-import { shuffle } from './../logic/pairings'
+
 
 class App extends Component {
 
@@ -16,9 +17,14 @@ class App extends Component {
 
   handleNewRound (e) {
     e.preventDefault()
-    const playerIds = Object.keys(this.props.players)
+    // const playerIds = Object.keys(this.props.players)
     const round = this.props.round + 1
-    this.props.newRound(round, round === 1 ? playerIds : shuffle(playerIds))
+    const confirmMsg = round === 1 ? 'Start tournament?' : `Generation Round ${ round }?`
+    if (!window.confirm(confirmMsg)) {
+      return
+    }
+    const newMatches = generateMatches(shuffle(Object.keys(this.props.players)), round)
+    this.props.newRound(round, newMatches)
   }
 
   render() {
@@ -32,7 +38,7 @@ class App extends Component {
         </p>
         <PlayerForm />
         <PlayerManager />
-        <GenerateRoundButton handleClick={ this.handleNewRound }/>
+        <GenerateRoundButton round={ this.props.round } handleClick={ this.handleNewRound }/>
       </div>
     );
   }
@@ -44,12 +50,12 @@ const mapStateToProps = state => ({
 })
 
 const matchDispatchToProps = {
-  newRound: function (round, players) {
+  newRound: function (round, newMatches) {
     return {
       type: 'NEW_ROUND',
       payload: {
-        round,
-        players
+        newMatches,
+        round
       }
     }
   }

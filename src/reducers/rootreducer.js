@@ -2,6 +2,7 @@
 import { combineReducers } from 'redux';
 // import players from './players'
 import { generateMatches } from './../logic/pairings'
+import { shuffle } from './../logic/pairings'
 
 
 const players = (state = {}, action = {}) => {
@@ -49,6 +50,19 @@ const round = (state = 0, action = {}) => {
   }
 }
 
+const rounds = (state = {}, action = {}) => {
+  switch (action.type) {
+    case 'NEW_ROUND':
+      return {
+        ...state,
+        [action.payload.round]: Object.keys(action.payload.newMatches)
+      }
+
+    default:
+      return state
+  }
+}
+
 const tournamentStarted = (state = false, action = {}) => {
   switch (action.type) {
     case 'NEW_ROUND':
@@ -68,9 +82,10 @@ const tournamentStarted = (state = false, action = {}) => {
 const matches = (state = {}, action = {}) => {
   switch (action.type) {
     case 'NEW_ROUND': 
+      // const players = Object.keys(action.payload.players)
       return {
         ...state,
-        ...generateMatches(action.payload.players, action.payload.round)
+        ...action.payload.newMatches
       }
     default:
       return state
@@ -97,6 +112,7 @@ const matches = (state = {}, action = {}) => {
 const rootreducer = combineReducers({
   players,
   round,
+  rounds,
   tournamentStarted,
   // rounds,
   matches

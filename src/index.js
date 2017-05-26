@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './containers/App';
-import './index.css';
-
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import rootReducer from './reducers/rootreducer';
 import thunkMiddleware from 'redux-thunk';
 
+import rootReducer from './reducers/rootreducer';
+import App from './containers/App';
+import './index.css';
 
 const configureStore = (preloadedState) => {
   const store = createStore(

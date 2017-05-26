@@ -12,3 +12,11 @@ export const RemovePlayer = name => ({
     name 
   }
 })
+
+export const NewRound = (round, players) => ({
+  type: 'NEW_ROUND',
+  payload: {
+    round,
+    players
+  }
+})
